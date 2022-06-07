@@ -1,4 +1,6 @@
 from .ADMM import ADMM
-from .APGM import APGM
+from .IALM import IALM
+from .APG import APG
+from .EALM import EALM
 
-algorithms = {"ADMM": ADMM, "APGM": APGM}
+algorithms = {"ADMM": ADMM, "IALM": IALM, "APG": APG, "EALM": EALM}

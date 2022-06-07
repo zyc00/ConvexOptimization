@@ -1,7 +1,8 @@
-# Reference:  Cand`es, E. J., Li, X., Ma, Y., and Wright, J. (2011).  
+# Reference:  Cand`es, E. J., Li, X., Ma, Y., and Wright, J. (2011).
 # Robust principal componentanalysis?.  Journal of the ACM, 58(3), 1-37.  (Mathematical theory
 
 import numpy as np
+
 
 def gen_matrix():
     # L是一个低秩矩阵，S是一个稀疏矩阵，这里设置低秩和稀疏的要求
@@ -12,8 +13,9 @@ def gen_matrix():
     L = np.random.uniform(0, 1, (15, 20))
     return S, L, S + L
 
-def APGM(M: np.array, iter:int):
-    mu = 0.25 / np.abs(M).mean() 
+
+def IALM(M: np.array, iter: int):
+    mu = 0.25 / np.abs(M).mean()
     lamb = 1 / np.sqrt(max(M.shape[0], M.shape[1]))
 
     S = np.zeros(M.shape)
