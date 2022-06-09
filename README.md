@@ -4,7 +4,7 @@
 We implement four algorithms to solve Robust Principle Component Analysis(RPCA). Then we implement two applications to test the performance and speed of the algorithms. The two applications are both 
 practical problems which can be modeled by RPCA.
 
-![result](./doc/result.png)
+![result](./doc/result.jpg)
 
 ## Requirment
 
