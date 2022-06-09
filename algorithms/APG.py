@@ -50,7 +50,9 @@ def APG(M, max_iter):
     t_1 = 1
     mu_bar = delta * mu_0
 
-    while n < 1000:
+    for i in range(max_iter):
+        if i % 20 == 0:
+            print(f"迭代到了第{i}次")
         YL = L_1 + (t_0 - 1) / t_1 * (L_1 - L_0)
         YS = S_1 + (t_0 - 1) / t_1 * (S_1 - S_0)
         GL = YL - 0.5 * (YL + YS - M)
@@ -62,5 +64,7 @@ def APG(M, max_iter):
         t_0 = t_1
         t_1 = (1 + pow(4 * t_0**2 + 1, 0.5)) / 2
         mu_0 = max(eta * mu_0, mu_bar)
+        if np.linalg.norm(M - L_1 - S_1, "fro") <= 1e-5 * np.linalg.norm(M, "fro"):
+            break
 
-    return L_1, S_1
+    return L_1, S_1, i

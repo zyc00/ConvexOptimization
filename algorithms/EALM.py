@@ -61,12 +61,12 @@ def EALM(M, max_iter):
     L = np.zeros((n1, n2))
     L_ = np.ones((n1, n2))
     F_M = Fnorm(M)
-    mu = 1 / F_M
-    n = 0
-    rau = 1.2172 + 1.8588 * 0.3
+    mu = 0.5 / np.linalg.norm(np.sign(M), 2)
+    rau = 6
     epsino = 10 ** (-6)
-    while n < max_iter:
-        n += 1
+    for i in range(max_iter):
+        if i % 20 == 0:
+            print(f"迭代到了第{i}次")
         S = S1
         while Fnorm(L_ - L) > delta:
             # print(Fnorm(L_-L))
@@ -79,5 +79,7 @@ def EALM(M, max_iter):
         mu = update_mu(M, mu, rau, epsino, Fn)
 
         F = Fnorm(M - L - S1)
-        print(F)
-    return L, S1
+
+        if np.linalg.norm(M - L - S1, "fro") <= 1e-5 * np.linalg.norm(M, "fro"):
+            break
+    return L, S1, i

@@ -2,7 +2,7 @@ from task import tasks
 from algorithms import algorithms
 
 task = "img"
-algorithm = "IALM"
+algorithm = "EALM"
 
 assert task in tasks.keys()
 assert algorithm in algorithms.keys()

@@ -4,16 +4,6 @@
 import numpy as np
 
 
-def gen_matrix():
-    # L是一个低秩矩阵，S是一个稀疏矩阵，这里设置低秩和稀疏的要求
-    p = 0.8
-    S = np.random.uniform(0, 1, (15, 20))
-
-    S = S * (np.random.uniform(0, 1, (15, 20)) >= p)
-    L = np.random.uniform(0, 1, (15, 20))
-    return S, L, S + L
-
-
 def IALM(M: np.array, iter: int):
     mu = 0.25 / np.abs(M).mean()
     lamb = 1 / np.sqrt(max(M.shape[0], M.shape[1]))
@@ -39,6 +29,8 @@ def IALM(M: np.array, iter: int):
         L = computeD(M - S + mu ** (-1) * Y, 1 / mu)
         S = computeS(M - L + mu ** (-1) * Y, lamb / mu)
         Y = Y + mu * (M - L - S)
-        # print(S[-1])
 
-    return L, S
+        if np.linalg.norm(M - L - S, "fro") <= 1e-5 * np.linalg.norm(M, "fro"):
+            break
+
+    return L, S, i
